@@ -15,10 +15,25 @@ const kLabelTextStyle = TextStyle(
   fontSize: 18.0,
   color: kTextColor,
 );
+const kLargeButtonTextStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+  // color: Color(0xFF8D8E98),
+);
 const kLargeLabelTextStyle = TextStyle(
   fontSize: 50.0,
   fontWeight: FontWeight.w900,
   // color: Color(0xFF8D8E98),
+);
+const kVeryLargeLabelTextStyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.w900,
+  // color: Color(0xFF8D8E98),
+);
+const kResultTextStyle = TextStyle(
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+  color: Color(0xFF24D876),
 );
 
 // enum MyColors {

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'constants.dart';
-import 'reusable_card.dart';
-import 'icon_content.dart';
+import 'results_page.dart';
+import '../calculator_brain.dart';
+import '../constants.dart';
+
+import '../components/bottom_button.dart';
+import '../components/icon_content.dart';
+import '../components/reusable_card.dart';
+import '../components/round_icon_button.dart';
 
 enum Gender {
   male,
@@ -169,7 +174,7 @@ class _InputPageState extends State<InputPage> {
                               },
                               onLongPress: () {
                                 setState(() {
-                                  weight -= 5;
+                                  weight += 5;
                                 });
                               },
                               icon: FontAwesomeIcons.plus,
@@ -230,43 +235,23 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kBottomContainerColor,
-            margin: const EdgeInsets.only(top: 10.0),
-            height: kBottomContainerHeight,
-            width: double.infinity,
-            child: const Center(child: Text('CALCULATE YOUR BMI')),
-          )
+          BottomButton(
+            buttonTitle: 'CALCULATE YOUR BMI',
+            onPress: () {
+              CalculatorBrain calc =
+                  CalculatorBrain(height: height, weight: weight);
+
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ResultsPage(
+                  bmIndex: calc.calculateBMI(),
+                  bmiSummary: calc.getResult(),
+                  bmiComment: calc.getInterpretation(),
+                );
+              }));
+            },
+          ),
         ],
       ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
-    this.onLongPress,
-  }) : super(key: key);
-  final IconData icon;
-  final void Function()? onPressed;
-  final void Function()? onLongPress;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      shape: const CircleBorder(),
-      fillColor: kIncrementActionColor,
-      constraints: const BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      elevation: 6.0,
-      onPressed: onPressed,
-      onLongPress: onLongPress,
-      child: Icon(icon),
     );
   }
 }
